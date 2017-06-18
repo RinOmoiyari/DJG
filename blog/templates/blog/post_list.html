@@ -6,7 +6,11 @@
       <h1> Recent Posts</h1>
         <hr />
         {% for post in posts %}
-          <p>{{ post.title }}</p>
+          <h3><a href="">{{ post.title }}</a></h3>
+
+          <p>{{ post.body|linebreaksbr }}</p>
+          <h6>This post was published: {{ post.published_date }}</h6>
+          <hr />
         {% endfor %}
   </body>
 </html>
