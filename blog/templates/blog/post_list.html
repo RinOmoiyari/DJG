@@ -1,1 +1,12 @@
-<h1>Post List</h1>
+<html>
+  <head>
+      <title>Rin's Blog - Recent Posts</title>
+  </head>
+  <body>
+      <h1> Recent Posts</h1>
+        <hr />
+        {% for post in posts %}
+          <p>{{ post.title }}</p>
+        {% endfor %}
+  </body>
+</html>
