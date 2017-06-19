@@ -6,14 +6,13 @@ Rin's Blog - Recent Posts
 
 
 {% block maincontent %}
-      <div class="page-header">
+
+      <div class="content container">
         <h1> Recent Posts</h1>
 
-      </div>
-      <div class="content container">
         {% for post in posts %}
         <div class="post">
-
+          <hr />
           <div class="date">
             <p>Published: {{ post.published_date }}</p>
           </div>

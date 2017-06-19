@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from . import models
+from . import models, forms
 
 # Create your views here.
 def post_list(request):
@@ -13,7 +13,40 @@ def post_details(request, pk):
     post = get_object_or_404(models.BlogPost, pk=pk)
     return render(request, 'blog/post_details.html', {'post':post})
 
-def publish_post(request, pk):
+def post_publish(request, pk):
     post = get_object_or_404(models.BlogPost, pk=pk)
     models.BlogPost.publish(post)
     return redirect('post_detail', pk=pk)
+
+def post_new(request):
+
+    if request.method == "POST":
+        form = forms.PostForm(request.POST)
+
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+
+
+            return redirect('post_detail', pk=post.pk)
+
+    else:
+        form = forms.PostForm()
+        return render(request, 'blog/post_edit.html', {'form':form})
+
+def post_edit(request, pk):
+    post = get_object_or_404(models.BlogPost, pk=pk)
+    if request.method == "POST":
+        form = forms.PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+
+
+            return redirect('post_detail', pk=post.pk)
+
+    else:
+        form = forms.PostForm(instance=post)
+        return render(request, 'blog/post_edit.html', {'form':form})
