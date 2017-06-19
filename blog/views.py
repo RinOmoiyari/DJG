@@ -4,9 +4,16 @@ from . import models, forms
 
 # Create your views here.
 def post_list(request):
+    subheader = 'Recent Posts'
     posts = models.BlogPost.objects.order_by('-published_date').filter(published_date__lte=timezone.now())
 
-    return render(request, 'blog/post_list.html', {'posts':posts})
+    return render(request, 'blog/post_list.html', {'posts':posts, 'subheader':subheader})
+
+def post_unpublished(request):
+    subheader = 'Unpublished Posts'
+    posts = models.BlogPost.objects.filter(published_date__isnull=True)
+
+    return render(request, 'blog/post_list.html', {'posts':posts, 'subheader':subheader})
 
 def post_details(request, pk):
     #post = models.BlogPost.objects.get(pk=pk)
@@ -19,7 +26,7 @@ def post_publish(request, pk):
     return redirect('post_detail', pk=pk)
 
 def post_new(request):
-
+    subheader = 'Create a New Post'
     if request.method == "POST":
         form = forms.PostForm(request.POST)
 
@@ -33,10 +40,11 @@ def post_new(request):
 
     else:
         form = forms.PostForm()
-        return render(request, 'blog/post_edit.html', {'form':form})
+        return render(request, 'blog/post_edit.html', {'form':form, 'subheader':subheader})
 
 def post_edit(request, pk):
     post = get_object_or_404(models.BlogPost, pk=pk)
+    subheader = 'Edit Post '
     if request.method == "POST":
         form = forms.PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -49,4 +57,4 @@ def post_edit(request, pk):
 
     else:
         form = forms.PostForm(instance=post)
-        return render(request, 'blog/post_edit.html', {'form':form})
+        return render(request, 'blog/post_edit.html', {'form':form, 'subheader':subheader})

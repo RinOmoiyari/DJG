@@ -8,7 +8,7 @@ Rin's Blog - New Post
 {% block maincontent %}
 
       <div class="content container">
-        <h1>New Post</h1>
+        <h1>{{ subheader }}</h1>
 
           <form method="POST" class="post-form">
             {% csrf_token %}
