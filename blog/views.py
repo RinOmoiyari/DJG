@@ -16,9 +16,9 @@ def post_unpublished(request):
     return render(request, 'blog/post_list.html', {'posts':posts, 'subheader':subheader})
 
 def post_details(request, pk):
-    #post = models.BlogPost.objects.get(pk=pk)
     post = get_object_or_404(models.BlogPost, pk=pk)
-    return render(request, 'blog/post_details.html', {'post':post})
+    subheader = 'Post %s' % (post.pk)
+    return render(request, 'blog/post_details.html', {'post':post, 'subheader':subheader})
 
 def post_publish(request, pk):
     post = get_object_or_404(models.BlogPost, pk=pk)
@@ -44,7 +44,7 @@ def post_new(request):
 
 def post_edit(request, pk):
     post = get_object_or_404(models.BlogPost, pk=pk)
-    subheader = 'Edit Post '
+    subheader = 'Edit: Post %s' % (post.pk)
     if request.method == "POST":
         form = forms.PostForm(request.POST, instance=post)
         if form.is_valid():
