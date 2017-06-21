@@ -25,6 +25,11 @@ def post_publish(request, pk):
     models.BlogPost.publish(post)
     return redirect('post_detail', pk=pk)
 
+def post_delete(request, pk):
+    post = get_object_or_404(models.BlogPost, pk=pk)
+    post.delete()
+    return redirect('post_list')
+
 def post_new(request):
     subheader = 'Create a New Post'
     if request.method == "POST":
