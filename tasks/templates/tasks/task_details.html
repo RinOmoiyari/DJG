@@ -18,7 +18,11 @@ Rin's Blog - Post {{ post.pk }}
 
 
           <p>{{ task.description |linebreaksbr }}</p>
+          {% if task.related_deliv %}
 
+            Related Deliverable: <a href="{% url 'deliverable_details' task.related_deliv_id %}">{{ task.related_deliv }}</a>
+
+          {% endif %}
         </div>
 
       </div>
