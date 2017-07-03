@@ -1,0 +1,30 @@
+{% extends 'tasks/base.html' %}
+
+{% block pagename %}
+Tasks
+{% endblock%}
+
+
+{% block maincontent %}
+
+      <div class="content container">
+
+
+        {% for task in tasks %}
+        <div class="post">
+          {% if forloop.first %}
+          {% else %}
+            <hr />
+          {% endif %}
+          <div class="date">
+            <p>Status: {{ task.status }}</p>
+          </div>
+          <h1><a href="{% url 'task_details' pk=task.pk %}">{{ task.title }}</a></h1>
+
+
+          <p>{{ task.body|linebreaksbr }}</p>
+
+        </div>
+        {% endfor %}
+      </div>
+{% endblock%}

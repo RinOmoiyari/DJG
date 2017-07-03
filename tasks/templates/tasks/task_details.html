@@ -1,0 +1,25 @@
+{% extends 'tasks/base.html' %}
+
+{% block pagename %}
+Rin's Blog - Post {{ post.pk }}
+{% endblock%}
+
+
+{% block maincontent %}
+
+      <div class="content container">
+
+        <div class="post">
+          <h1> {{ task.title }}</h1>
+
+          <div class="date">
+            <p>Status: {{ task.status }}</p>
+          </div>
+
+
+          <p>{{ task.description |linebreaksbr }}</p>
+
+        </div>
+
+      </div>
+{% endblock%}

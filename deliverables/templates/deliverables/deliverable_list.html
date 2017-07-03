@@ -1,0 +1,30 @@
+{% extends 'deliverables/base.html' %}
+
+{% block pagename %}
+Rin's Blog - Recent deliverables
+{% endblock%}
+
+
+{% block maincontent %}
+
+      <div class="content container">
+
+
+        {% for deliverable in deliverables %}
+        <div class="deliverable">
+          {% if forloop.first %}
+          {% else %}
+            <hr />
+          {% endif %}
+          <div class="date">
+            <p>Status: {{ deliverable.status }}</p>
+          </div>
+          <h1><a href="{% url 'deliverable_details' pk=deliverable.pk %}">{{ deliverable.title }}</a></h1>
+
+
+          <p>{{ deliverable.request|linebreaksbr }}</p>
+
+        </div>
+        {% endfor %}
+      </div>
+{% endblock%}

@@ -1,0 +1,21 @@
+{% extends 'tasks/base.html' %}
+
+{% block pagename %}
+Rin's Blog - New Post
+{% endblock%}
+
+
+{% block maincontent %}
+
+      <div class="content container">
+
+
+          <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+          </form>
+
+
+      </div>
+{% endblock%}

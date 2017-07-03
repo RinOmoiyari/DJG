@@ -1,0 +1,21 @@
+{% extends 'deliverables/base.html' %}
+
+{% block pagename %}
+New Deliverable
+{% endblock%}
+
+
+{% block maincontent %}
+
+      <div class="content container">
+
+
+          <form method="POST" class="post-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+          </form>
+
+
+      </div>
+{% endblock%}

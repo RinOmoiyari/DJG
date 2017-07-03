@@ -1,0 +1,31 @@
+{% extends 'deliverables/base.html' %}
+
+{% block pagename %}
+Deliverable {{ deliverable.pk }}
+{% endblock%}
+
+
+{% block maincontent %}
+
+      <div class="content container">
+
+        <div class="deliverable">
+          <h1> {{ deliverable.title }}</h1>
+
+          <div class="date">
+            <p>Status: {{ deliverable.published_date }}</p>
+          </div>
+
+
+          <p>{{ deliverable.body|linebreaksbr }}</p>
+
+        </div>
+        <h3>Related Tasks:</h3>
+
+        <p>(<a href="{% url 'task_new_from_deliv' deliverable.pk %}">New task for this deliverable</a>)</p>
+        {% for task in tasks %}
+          <p>&bull; <a href="{% url 'task_details' pk=task.pk %}">{{ task.title }}</a></p>
+
+        {% endfor %}
+      </div>
+{% endblock%}
