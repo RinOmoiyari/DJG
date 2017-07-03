@@ -7,8 +7,9 @@ Deliverable {{ deliverable.pk }}
 
 {% block maincontent %}
 
-      <div class="content container">
-
+        {% if user.is_authenticated %}
+          <a class="btn btn-default" href="{% url 'deliverable_edit' pk=deliverable.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
         <div class="deliverable">
           <h1> {{ deliverable.title }}</h1>
 
@@ -17,9 +18,11 @@ Deliverable {{ deliverable.pk }}
           </div>
 
 
+
           <p>{{ deliverable.request|linebreaksbr }}</p>
 
         </div>
+        <hr />
         <h3>Related Tasks:</h3>
 
         <p>(<a href="{% url 'task_new_from_deliv' deliverable.pk %}">New task for this deliverable</a>)</p>
@@ -27,5 +30,5 @@ Deliverable {{ deliverable.pk }}
           <p>&bull; <a href="{% url 'task_details' pk=task.pk %}">{{ task.title }}</a></p>
 
         {% endfor %}
-      </div>
+      
 {% endblock%}

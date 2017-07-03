@@ -9,6 +9,12 @@ def deliverable_list(request):
     deliverables = models.Deliverable.objects.all()
     return render(request, 'deliverables/deliverable_list.html', {'deliverables':deliverables, 'subheader':subheader})
 
+def deliverable_list_tasks(request):
+    subheader = 'Deliverables'
+    deliverables = models.Deliverable.objects.all()
+    all_tasks = tasks.models.Task.objects.all()
+    return render(request, 'deliverables/deliverable_list_tasks.html', {'deliverables':deliverables,'tasks':all_tasks, 'subheader':subheader})
+
 def deliverable_details(request, pk):
     deliverable = get_object_or_404(models.Deliverable, pk=pk)
     subheader = 'Deliverable %s' % (deliverable.pk)
@@ -45,8 +51,8 @@ def deliverable_edit(request, pk):
             deliverable.save()
 
 
-            return redirect('deliverable_detail', pk=deliverable.pk)
+            return redirect('deliverable_details', pk=deliverable.pk)
 
     else:
-        form = forms.DeliverableForm(instance=post)
+        form = forms.DeliverableForm(instance=deliverable)
         return render(request, 'deliverables/deliverable_edit.html', {'form':form, 'subheader':subheader})

@@ -23,15 +23,14 @@
         <a href="{% url 'post_unpublished' %}" class="top-menu"><span class="glyphicon glyphicon-eye-close"></span></a>
         <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
         {% endif %}
-        <br />
-
       </h1>
-      <h2>&bull; {{ subheader }}</h2>
-      View: <a href="{% url 'post_list' %}">Blog</a> | <a href="{% url 'deliverable_list' %}">Deliverables</a> | <a href="{% url 'task_list' %}">Tasks</a>
+      <p class="subheader">&bull; {{ subheader }}</p>
     </div>
+    <div class="content container">
+      <div style="text-align: right"><strong>View:</strong> <a href="{% url 'post_list' %}">Blog</a> | <a href="{% url 'deliverable_list' %}">Deliverables</a> | <a href="{% url 'task_list' %}">Tasks</a></div>
 
       {% block maincontent %}
       {% endblock %}
-
+    </div>
   </body>
 </html>

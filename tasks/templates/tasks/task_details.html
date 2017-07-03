@@ -7,8 +7,9 @@ Rin's Blog - Post {{ post.pk }}
 
 {% block maincontent %}
 
-      <div class="content container">
-
+        {% if user.is_authenticated %}
+          <a class="btn btn-default" href="{% url 'task_edit' pk=task.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
         <div class="post">
           <h1> {{ task.title }}</h1>
 
@@ -18,12 +19,12 @@ Rin's Blog - Post {{ post.pk }}
 
 
           <p>{{ task.description |linebreaksbr }}</p>
+          <hr />
           {% if task.related_deliv %}
 
-            Related Deliverable: <a href="{% url 'deliverable_details' task.related_deliv_id %}">{{ task.related_deliv }}</a>
+            <strong>Related Deliverable:</strong> <a href="{% url 'deliverable_details' task.related_deliv_id %}">{{ task.related_deliv }}</a>
 
           {% endif %}
         </div>
 
-      </div>
 {% endblock%}

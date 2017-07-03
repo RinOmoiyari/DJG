@@ -48,8 +48,8 @@ def task_edit(request, pk):
             task.save()
 
 
-            return redirect('task_detail', pk=task.pk)
+            return redirect('task_details', pk=task.pk)
 
     else:
-        form = forms.TaskForm(instance=post)
+        form = forms.TaskForm(instance=task)
         return render(request, 'tasks/task_edit.html', {'form':form, 'subheader':subheader})

@@ -21,7 +21,12 @@ Rin's Blog - Recent deliverables
 
 
           <p>{{ deliverable.request|linebreaksbr }}</p>
-
+          <strong>Related Tasks:</strong>
+          {% for task in tasks %}
+              {% if task.related_deliv_id == deliverable.pk %}
+                  <p>&bull; {{ task.title }}</p>
+              {% endif %}
+          {% endfor %}
         </div>
         {% endfor %}
 

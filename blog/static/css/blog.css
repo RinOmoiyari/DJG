@@ -17,6 +17,12 @@
   text-decoration: none;
 }
 
+p.subheader {
+  color: #FFFFFF;
+  font-size: 16pt;
+  text-decoration: none;
+}
+
 .content {margin-left: 40px;}
 
 h1, h2, h3, h4 {font-family: 'Spectral', cursive;}
